@@ -1,3 +1,22 @@
+2 Classes
+Trains
+Cities
+
+Home - Display cities that a train stops in
+Operator - Add trains, add cities, link, update trains and cities
+passenger - city -> train; train -> city (2 views)
+
+layout.erb
+station.erb -- add train
+view_train.erb -- add city
+edit_train.erb
+edit_city.erb
+
+search_results.erb
+
+
+docker exec -it -u postgres $1 psql
+
 ## Description
 
 This repository provides the necessary Docker configuration to use Sinatra and Postgres for Ruby and Rails Week 3 at Epicodus. In addition to running a Sinatra server and being able to use Pry, RSpec, and Capybara, you'll also be able to do the following:
