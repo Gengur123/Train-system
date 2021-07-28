@@ -8,7 +8,7 @@ passenger - city -> train; train -> city (2 views)
 
 layout.erb
 station.erb -- add train
-view_train.erb -- add city
+view_train.erb -- add city    
 edit_train.erb
 edit_city.erb
 

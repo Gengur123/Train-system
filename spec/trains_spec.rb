@@ -47,11 +47,11 @@ describe '#Train' do
     end
   end
 
-  describe('#update') do
+  describe('#update_by_name') do
     it("updates an train by id") do
       train = Train.new({:name => "Thomas", :id => nil})
       train.save()
-      train.update("Percy")
+      train.update_by_name("Percy")
       expect(train.name).to(eq("Percy"))
     end
   end
@@ -66,6 +66,20 @@ describe '#Train' do
       expect(Train.all).to(eq([train2]))
     end
   end
+
+  describe('#update') do
+  it("adds a city to a train") do
+    city = City.new({:city_name => "Portland",:id => nil})
+    city.save()
+    city2 = City.new({:city_name => "Vancouver",:id => nil})
+    city2.save()
+    train = Train.new({:name => "Percy", :id => nil})
+    train.save()
+    train.update({:stop_name => "Portland"})
+    binding.pry
+    expect(train.cities).to(eq([city]))
+  end
+end
 
 
 end

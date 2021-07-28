@@ -38,7 +38,7 @@ class Train
     Train.new({:name => name, :id => id})
   end
 
-  def update(name)
+  def update_by_name(name)
     @name = name
     DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{@id};")
   end
@@ -46,6 +46,33 @@ class Train
   def delete
     DB.exec("DELETE FROM trains WHERE id = #{@id};")
     DB.exec("DELETE FROM stops WHERE train_id = #{@id};") 
+  end
+
+  def update(attributes)
+ 
+    if (attributes.has_key?(:name)) && (attributes.fetch(:name) != nil)
+      @name = attributes.fetch(:name)
+      DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{@id};")
+    elsif (attributes.has_key?(:stop_name)) && (attributes.fetch(:stop_name) != nil)
+      stop_name = attributes.fetch(:stop_name)
+      city = DB.exec("SELECT * FROM cities WHERE lower(city_name) ='#{stop_name.downcase}';").first
+      if city != nil
+        DB.exec("INSERT INTO stops (train_id, city_id) VALUES (#{city['id'].to_i}, #{@id});")
+        # train = DB.exec("SELECT * FROM trains WHERE ")
+      end
+    end
+  end
+
+  def cities
+    cities = []
+    results = DB.exec("SELECT city_id FROM stops WHERE train_id = #{@id};")
+    results.each() do |result|
+      city_id = result.fetch("city_id").to_i()
+      city = DB.exec("SELECT * FROM cities WHERE id = #{city_id};")
+      city_name = city.first().fetch("city_name")
+      cities.push(City.new({:city_name => city_name, :id => city_id}))
+    end
+    cities
   end
 
 
