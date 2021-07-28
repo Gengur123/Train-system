@@ -1,0 +1,17 @@
+<h2>Train Name: <%= @train.name %></h2>
+
+
+<h2>Add a stop:</h2>
+
+<form action="/trains<%= @train.id %>/edit" method="post">
+<%if @cities.any? %>
+  <% @cities.each do |city| %>
+  <input type="checkbox" id="city_name" name="city_name" value='<%= city.city_name %>'>
+  <label for="city_name"> <%= city.city_name %> </label>
+  <br>
+  <% end %>
+  <% else %>
+  <p>There are currently no trains to display.</p>
+<% end %>
+<button type="submit" class="btn">Add a stop</button>
+</form>
