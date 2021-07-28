@@ -13,7 +13,7 @@ class Train
     returned_trains.each() do |train|
       name = train.fetch("name")
       id = train.fetch("id").to_i
-      trains.push(train.new({:name => name, :id => id}))
+      trains.push(Train.new({:name => name, :id => id}))
     end
     trains
   end
@@ -45,10 +45,8 @@ class Train
 
   def delete
     DB.exec("DELETE FROM trains WHERE id = #{@id};")
-    DB.exec("DELETE FROM trains WHERE train_id = #{@id};") 
+    DB.exec("DELETE FROM stops WHERE train_id = #{@id};") 
   end
 
-  def trains
-    Song.find_by_train(self.id)
-  end
+
 end

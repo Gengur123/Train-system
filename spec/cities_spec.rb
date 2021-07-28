@@ -5,96 +5,87 @@ require 'spec_helper'
 describe '#Class' do
 
   before(:each) do
-    @train = Train.new({:name => "Giant Steps", :id => nil})
-    @album.save()
+    @train = Train.new({:name => "Thomas", :id => nil})
+    @train.save()
     end
 
 
   describe('#==') do
-    it("is the same song if it has the same attributes as another song") do
-      song = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-      song2 = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-      expect(song).to(eq(song2))
+    it("is the same city if it has the same attributes as another city") do
+      city = City.new({:city_name => "Portland", :id => nil})
+      city2 = City.new({:city_name => "Portland", :id => nil})
+      expect(city).to(eq(city2))
     end
   end
 
-#   describe('.all') do
-#     it("returns a list of all songs") do
-#       song = Song.new({:name => "Giant Steps", :album_id => @album.id, :id => nil})
-#       song.save()
-#       song2 = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song2.save()
-#       expect(Song.all).to(eq([song, song2]))
-#     end
-#   end
+  describe('.all') do
+    it("returns a list of all cities") do
+      city = City.new({:city_name => "Portland",:id => nil})
+      city.save()
+      city2 = City.new({:city_name => "Vancouver", :id => nil})
+      city2.save()
+      expect(City.all).to(eq([city, city2]))
+    end
+  end
 
-#   describe('.clear') do
-#     it("clears all songs") do
-#       song = Song.new({:name => "Giant Steps", :album_id => @album.id, :id => nil})
-#       song.save()
-#       song2 = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song2.save()
-#       Song.clear()
-#       expect(Song.all).to(eq([]))
-#     end
-#   end
+  describe('.clear') do
+    it("clears all cities") do
+      city = City.new({:city_name => "Portland",:id => nil})
+      city.save()
+      city2 = City.new({:city_name => "Vancouver", :id => nil})
+      city2.save()
+      City.clear()
+      expect(City.all).to(eq([]))
+    end
+  end
 
-#   describe('#save') do
-#     it("saves a song") do
-#       song = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song.save()
-#       expect(Song.all).to(eq([song]))
-#     end
-#   end
+  describe('#save') do
+    it("saves a city") do
+      city = City.new({:city_name => "Portland",:id => nil})
+      city.save()
+      expect(City.all).to(eq([city]))
+    end
+  end
 
-#   describe('.find') do
-#     it("finds a song by id") do
-#       song = Song.new({:name => "Giant Steps", :album_id => @album.id, :id => nil})
-#       song.save()
-#       song2 = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song2.save()
-#       expect(Song.find(song.id)).to(eq(song))
-#     end
-#   end
+  describe('.find') do
+    it("finds a city by id") do
+      city = City.new({:city_name => "Portland",:id => nil})
+      city.save()
+      city2 = City.new({:city_name => "Vancouver", :id => nil})
+      city2.save()
+      expect(City.find(city.id)).to(eq(city))
+    end
+  end
 
-#   describe('#update') do
-#     it("updates an song by id") do
-#       song = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song.save()
-#       song.update("Mr. P.C.", @album.id)
-#       expect(song.name).to(eq("Mr. P.C."))
-#     end
-#   end
+  describe('#update') do
+  it("adds an train to a city") do
+    city = City.new({:city_name => "Portland",:id => nil})
+    city.save()
+    train = Train.new({:name => "Percy", :id => nil})
+    train.save()
+    city.update({:train_name => "Percy"})
+    expect(city.trains).to(eq([train]))
+  end
+end
 
-#   describe('#delete') do
-#     it("deletes an song by id") do
-#       song = Song.new({:name => "Giant Steps", :album_id => @album.id, :id => nil})
-#       song.save()
-#       song2 = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song2.save()
-#       song.delete()
-#       expect(Song.all).to(eq([song2]))
-#     end
-#   end
+describe('#update') do
+    it("updates an album by id") do
+      city = City.new({:city_name => "Portland",:id => nil})
+      city.save()
+      city.update_by_name("Salem")
+      expect(city.city_name).to(eq("Salem"))
+    end
+  end
 
-#   describe('.find_by_album') do
-#     it("finds songs for an album") do
-#       album2 = Album.new({:name => "Blue", :id => nil})
-#       album2.save
-#       song = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song.save()
-#       song2 = Song.new({:name => "California", :album_id => album2.id , :id => nil})
-#       song2.save()
-#       expect(Song.find_by_album(album2.id)).to(eq([song2]))
-#     end
-#   end
-
-#   describe('#album') do
-#     it("finds the album a song belongs to") do
-#       song = Song.new({:name => "Naima", :album_id => @album.id, :id => nil})
-#       song.save()
-#       expect(song.album()).to(eq(@album))
-#     end
-#   end
-# end
+  describe('#delete') do
+    it("deletes a city by id") do
+      city = City.new({:city_name => "Portland",:id => nil})
+      city.save()
+      city2 = City.new({:city_name => "Vancouver", :id => nil})
+      city2.save()
+      city.delete()
+      expect(City.all).to(eq([city2]))
+    end
+  end
+end
 
