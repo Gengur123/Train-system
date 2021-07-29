@@ -32,6 +32,7 @@ end
 
 get('/trains/:id') do
   @train = Train.find(params[:id].to_i())
+  @stops = @train.cities()
   erb(:train)
 end
 
@@ -54,6 +55,10 @@ get('/trains/:id/edit') do
 end
 
 post('/trains/:id/edit') do
-  @city_name = params[:city_name]
+  train = Train.find(params[:id].to_i())
+  city_name = params[:city_name]
+  
+  fluffy = train.update(city_name)
+  @stops = fluffy.cities()
+  erb(:train)
 end
-

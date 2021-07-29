@@ -3,7 +3,7 @@
 
 <h2>Add a stop:</h2>
 
-<form action="/trains<%= @train.id %>/edit" method="post">
+<form action="/trains/<%= @train.id %>/edit" method="post">
 <%if @cities.any? %>
   <% @cities.each do |city| %>
   <input type="checkbox" id="city_name" name="city_name" value='<%= city.city_name %>'>
