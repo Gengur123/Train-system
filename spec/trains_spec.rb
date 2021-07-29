@@ -56,6 +56,21 @@ describe '#Train' do
     end
   end
 
+  describe('#update') do
+  it("adds a city to a train") do
+    city = City.new({:city_name => "Portland",:id => nil})
+    city.save()
+    city2 = City.new({:city_name => "Vancouver",:id => nil})
+    city2.save()
+    train = Train.new({:name => "Percy", :id => nil})
+    train.save()
+    train.update({:stop_name => "Portland"})
+    expect(train.cities).to(eq([city]))
+    
+    end
+  end
+end
+
   describe('#delete') do
     it("deletes all trains belonging to a deleted train") do
       train = Train.new({:name => "Percy", :id => nil})
@@ -67,19 +82,4 @@ describe '#Train' do
     end
   end
 
-  describe('#update') do
-  it("adds a city to a train") do
-    city = City.new({:city_name => "Portland",:id => nil})
-    city.save()
-    city2 = City.new({:city_name => "Vancouver",:id => nil})
-    city2.save()
-    train = Train.new({:name => "Percy", :id => nil})
-    train.save()
-    train.update({:stop_name => "Portland"})
-    binding.pry
-    expect(train.cities).to(eq([city]))
-  end
-end
-
-
-end
+  

@@ -57,16 +57,17 @@ describe '#Class' do
     end
   end
 
-  describe('#update') do
-  it("adds an train to a city") do
-    city = City.new({:city_name => "Portland",:id => nil})
-    city.save()
-    train = Train.new({:name => "Percy", :id => nil})
-    train.save()
-    city.update({:train_name => "Percy"})
-    expect(city.trains).to(eq([train]))
-  end
-end
+
+#   describe('#update') do
+#   it("adds an train to a city") do
+#     city = City.new({:city_name => "Portland",:id => nil})
+#     city.save()
+#     train = Train.new({:name => "Percy", :id => nil})
+#     train.save()
+#     city.update({:train_name => "Percy"})
+#     expect(city.trains).to(eq([train]))
+#   end
+# end
 
 describe('#update') do
     it("updates an album by id") do

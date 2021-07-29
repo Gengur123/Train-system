@@ -1,3 +1,4 @@
+require 'pry'
 class City
   attr_reader :id
   attr_accessor :city_name
